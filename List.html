@@ -1,10 +1,18 @@
+<div>
+    	<input type="text" onsubmit="addNote();" placeholder="Type something..." id="myInput">
+    	<button type="button" onclick="addNote();">Set</button>
+</div>
+
+
+
 <style type="text/css">
 	.box{
 		background-color: red;
 		height: 50px;
-		padding: 20px;
+		padding: 10px;
 		margin-bottom: 10px
 	}
+
 
 	body{
 		width: 500px;
@@ -13,25 +21,62 @@
 	}
 </style>
 
+<head>
+	<title>MinimaList Web Port</title>
+</head>
+
 
 
 <body>
 	<div class="box">
 		bruh
+
+		<button onClick="deleteNote(this.id)" id="wack">DELETE</button>
 	</div>
 	<div class="box">
 		bruh
 	</div>
 </body>
 
-    <input type="text" placeholder="Type something..." id="myInput">
-    <button type="button" onclick="addNote();">Set</button>
-
 <script type="">
 	var currentNote;
 
+	document.getElementById("myInput").onkeypress = function(event){
+                if (event.keyCode == 13 || event.which == 13){
+			addNote();
+			document.getElementById("myInput").value = null;    
+		}
+           };
+
+
+
 	function addNote(){
-		currentNote= document.getElementById("myInput").value;
-		console.log(currentNote);
+		if(document.getElementById("myInput").value != ""){
+
+			currentNote= document.getElementById("myInput").value;
+			console.log(currentNote);
+			var box = document.createElement("div");
+			box.innerHTML = currentNote; 
+			box.className = "box";		
+			document.body.append(box);
+			
+			var btn = document.createElement("div");
+			btn.innerHTML = currentNote; 
+			btn.id = "button";
+			btn.innerHTML = "delete";
+			document.box.appendChild(btn); 
+
+
+		}else{
+			console.log("NULL");
+		}
+		
+	}
+
+	function deleteNote(stg){
+	   	 var elem = document.getElementById(stg);
+   		 elem.parentElement.remove(elem);	
+	
 	}
 </script>
+
